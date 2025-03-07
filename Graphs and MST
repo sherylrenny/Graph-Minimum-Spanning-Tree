@@ -1,0 +1,44 @@
+#dont forget to install and add the library(igraph)
+> library(igraph)
+
+#define the edges and use make_graph() to depict the graph
+> edges=c("A","B","A","C","A","D","B","C","C","D","D","E","C","E") 
+> G=make_graph(edges,directed=FALSE)
+> plot(G, main="Graph", vertex.color="pink", vertex.size=30) 
+
+#number of weights and edges should be same
+> weight=c(10,12,13,14,15,16,17)
+
+# Assign weights and labels
+> E(G)$WEIGHT=weight
+
+#plotting the graph
+> plot(G, edge.label=E(G)$weight)
+
+#degree to know which vertex has which degree
+> degree(G)
+
+#Making Minimum Spanning Tree using Prim's algorithm
+graph_mst = mst(G, algorithm = "prim")
+
+# Plotting Minimum Spanning Tree
+plot(graph_mst, edge.label = E(graph_mst)$weight, vertex.color = "pink", vertex.size = 30, main="Minimum Spanning Tree")
+
+#-----------------------------------------------
+#Graph through adjacency matrix:
+> adjacency_matrix=matrix(c(0,3,4,5,0,3,0,6,0,0,4,6,0,7,9,5,0,7,0,8,0,0,9,8,0),nrow=5,byrow = TRUE)      //this is weight of ours
+
+#use graoh_from_adjacency_matrix() to define the graph
+> G=graph_from_adjacency_matrix(adjacency_matrix, mod = 'undirected', weighted=TRUE)
+
+#assign the name
+> V(G)$name=c("mumbai","pune","kohlapur","lavasa","lonavala")
+> plot(G, main="Graph", vertex.color="pink", vertex.size=30)
+
+#make MST using Prim's Algorithm
+mst_graph = mst(G, algorithm = 'prim')
+
+#Plotting MST
+plot(mst_graph, edge.label = E(mst_graph)$weight, 
+     vertex.color = "pink", 
+     vertex.size = 30, main="Minimum Spanning Tree")
